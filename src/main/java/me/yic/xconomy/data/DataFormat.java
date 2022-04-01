@@ -19,9 +19,11 @@
 package me.yic.xconomy.data;
 
 import me.yic.xconomy.XConomy;
+import me.yic.xconomy.info.DefaultConfig;
 import org.bukkit.ChatColor;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 
@@ -30,50 +32,58 @@ public class DataFormat {
     public static boolean isint = false;
     public static DecimalFormat decimalFormat;
     public static BigDecimal maxNumber;
-    final static String displayformat = XConomy.config.getString("Currency.display-format");
-    final static String pluralname = XConomy.config.getString("Currency.plural-name");
-    final static String singularname = XConomy.config.getString("Currency.singular-name");
+    final static String displayformat = XConomy.Config.DISPLAY_FORMAT;
+    final static String pluralname = XConomy.Config.PLURAL_NAME;
+    final static String singularname = XConomy.Config.SINGULAR_NAME;
 
     public static BigDecimal formatString(String am) {
         BigDecimal bigDecimal = new BigDecimal(am);
         if (isint) {
-            return bigDecimal.setScale(0, BigDecimal.ROUND_DOWN);
+            return bigDecimal.setScale(0, RoundingMode.DOWN);
         } else {
-            return bigDecimal.setScale(2, BigDecimal.ROUND_DOWN);
+            return bigDecimal.setScale(2, RoundingMode.DOWN);
         }
     }
 
     public static BigDecimal formatdouble(double am) {
         BigDecimal bigDecimal = BigDecimal.valueOf(am);
         if (isint) {
-            return bigDecimal.setScale(0, BigDecimal.ROUND_DOWN);
+            return bigDecimal.setScale(0, RoundingMode.DOWN);
         } else {
-            return bigDecimal.setScale(2, BigDecimal.ROUND_DOWN);
+            return bigDecimal.setScale(2, RoundingMode.DOWN);
         }
     }
 
-    @SuppressWarnings("ConstantConditions")
+
     public static String shown(BigDecimal am) {
-        if (am.compareTo(BigDecimal.ONE) > 0) {
+        if (am.compareTo(BigDecimal.ONE) == 0) {
             return ChatColor.translateAlternateColorCodes('&', displayformat
                     .replace("%balance%", decimalFormat.format(am))
-                    .replace("%currencyname%", pluralname));
+                    .replace("%format_balance%", getformatbalance(am))
+                    .replace("%currencyname%", singularname));
         }
         return ChatColor.translateAlternateColorCodes('&', displayformat
                 .replace("%balance%", decimalFormat.format(am))
-                .replace("%currencyname%", singularname));
+                .replace("%format_balance%", getformatbalance(am))
+                .replace("%currencyname%", pluralname));
     }
 
-    @SuppressWarnings("ConstantConditions")
-    public static String shownd(double am) {
-        if (am > 1) {
+
+    public static String shown(double am) {
+        return shown(BigDecimal.valueOf(am));
+    }
+
+    public static String PEshownf(BigDecimal am) {
+        if (am.compareTo(BigDecimal.ONE) == 0) {
             return ChatColor.translateAlternateColorCodes('&', displayformat
-                    .replace("%balance%", decimalFormat.format(am))
-                    .replace("%currencyname%", pluralname));
+                    .replace("%balance%", getformatbalance(am))
+                    .replace("%format_balance%", getformatbalance(am))
+                    .replace("%currencyname%", singularname));
         }
         return ChatColor.translateAlternateColorCodes('&', displayformat
-                .replace("%balance%", decimalFormat.format(am))
-                .replace("%currencyname%", singularname));
+                .replace("%balance%", getformatbalance(am))
+                .replace("%format_balance%", getformatbalance(am))
+                .replace("%currencyname%", pluralname));
     }
 
     public static boolean isMAX(BigDecimal am) {
@@ -82,8 +92,8 @@ public class DataFormat {
 
     public static void load() {
         maxNumber = setmaxnumber();
-        isint = XConomy.config.getBoolean("Currency.integer-bal");
-        String gpoint = XConomy.config.getString("Currency.thousands-separator");
+        isint = XConomy.Config.INTEGER_BAL;
+        String gpoint = XConomy.Config.THOUSANDS_SEPARATOR;
         decimalFormat = new DecimalFormat();
 
         if (!isint) {
@@ -97,12 +107,12 @@ public class DataFormat {
             decimalFormat.setDecimalFormatSymbols(spoint);
         }
 
-        ServerINFO.PaymentTax = setpaymenttax();
+        XConomy.Config.PAYMENT_TAX = setpaymenttax();
     }
 
 
     private static BigDecimal setmaxnumber() {
-        String maxn = XConomy.config.getString("Currency.max-number");
+        String maxn = XConomy.Config.MAX_NUMBER;
         BigDecimal defaultmaxnumber = new BigDecimal("10000000000000000");
         if (maxn == null) {
             return defaultmaxnumber;
@@ -120,10 +130,30 @@ public class DataFormat {
 
 
     private static BigDecimal setpaymenttax() {
-        double pt = XConomy.config.getDouble("Settings.payment-tax");
-        if (pt < 0.0){
+        double pt = DefaultConfig.config.getDouble("Settings.payment-tax");
+        if (pt < 0.0) {
             pt = 0.0;
         }
         return formatdouble(pt).add(BigDecimal.ONE);
+    }
+
+    private static String getformatbalance(BigDecimal bal) {
+        if (XConomy.Config.FORMAT_BALANCE != null) {
+            if (bal.doubleValue() < XConomy.Config.FORMAT_BALANCE.get(0)) {
+                return decimalFormat.format(bal);
+            }
+            BigDecimal x = BigDecimal.ZERO;
+            for (int b : XConomy.Config.FORMAT_BALANCE) {
+                if (bal.doubleValue() > b) {
+                    x = BigDecimal.valueOf(b);
+                } else {
+                    break;
+                }
+            }
+            BigDecimal aa = bal.divide(x, 3, RoundingMode.DOWN);
+            return DataFormat.decimalFormat.format(aa) + DefaultConfig.config.getString("Currency.format-balance." + x);
+        } else {
+            return decimalFormat.format(bal);
+        }
     }
 }
