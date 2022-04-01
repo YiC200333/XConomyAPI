@@ -44,7 +44,7 @@ PlayerData.getUniqueId();
 PlayerData.getName();
 //获取玩家金额，返回BigDecimal
 PlayerData.getBalance();
-//获取验证数据是否有效，返回boolean
+//验证数据是否有效，返回boolean
 PlayerData.isValid();
 ```
 关于PlayerData
