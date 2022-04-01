@@ -18,13 +18,14 @@
  */
 package me.yic.xconomy;
 
+import me.yic.xconomy.info.DefaultConfig;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class XConomy extends JavaPlugin {
 
     private static XConomy instance;
-    public static FileConfiguration config;
+    public static DefaultConfig Config;
 
     @SuppressWarnings("ConstantConditions")
     public void onEnable() {

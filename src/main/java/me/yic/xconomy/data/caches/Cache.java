@@ -18,28 +18,12 @@
  */
 package me.yic.xconomy.data.caches;
 
-import org.bukkit.entity.Player;
-
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Cache {
     public static List<String> baltop_papi = new ArrayList<>();
     public static BigDecimal sumbalance = BigDecimal.ZERO;
-
-
-    public static BigDecimal getBalanceFromCacheOrDB(UUID u) {
-        return null;
-    }
-
-
-    public static void change(String type, UUID u, String playername, BigDecimal amount, Boolean isAdd, String reason) {
-    }
-
-
-    public static UUID translateUUID(String name, Player pp) {
-        return null;
-    }
-
 
 }

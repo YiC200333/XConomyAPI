@@ -1,5 +1,5 @@
 # About XConomyAPI
-For XConomy 2.10.5
+For XConomy 2.17.2
 ## Chinese
 ```java
 XConomyAPI xcapi = new XConomyAPI;
@@ -16,12 +16,6 @@ xcapi.isbungeecordmode();
 是否启用BC模式，返回boolean
 
 ```java
-xcapi.translateUUID(String playername);
-```
-将玩家名称转换为UUID，返回UUID  
-如果玩家不存在，返回null
-
-```java
 xcapi.formatdouble(String amount);
 ```
 格式化amount，返回BigDecimal
@@ -33,9 +27,32 @@ xcapi.getdisplay(BigDecimal balance);
 比如 5,000 元
 
 ```java
-xcapi.getbalance(UUID uid);
+xcapi.createPlayerData(uid, name);
 ```
-获取玩家金额，返回BigDecimal
+创建玩家数据
+
+```java
+xcapi.getPlayerData(UUID uid);
+xcapi.getPlayerData(String name);
+```
+获取玩家数据，返回PlayerData
+
+```java
+//获取玩家UUID
+PlayerData.getUniqueId();
+//获取玩家名称
+PlayerData.getName();
+//获取玩家金额，返回BigDecimal
+PlayerData.getBalance();
+//获取验证数据是否有效，返回boolean
+PlayerData.isValid();
+```
+关于PlayerData
+
+```java
+xcapi.getorcreateAccountBalance(String account);
+```
+获取非玩家账号金额，返回BigDecimal
 
 ```java
 xcapi.ismaxnumber(BigDecimal amount);
@@ -43,7 +60,7 @@ xcapi.ismaxnumber(BigDecimal amount);
 检查金额是否为最大值，返回boolean
 
 ```java
-xcapi.changebalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
+xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
 ```
 对金额进行修改，返回Integer  
 isadd = true 为增加金额  
@@ -51,6 +68,17 @@ isadd = false 为扣除金额
 isadd = null 为设置金额  
 返回0 表示成功  
 返回1 失败，表示BC模式且没有玩家存在  
+返回2 失败,表示玩家余额不足  
+返回3 失败,表示玩家余额超出最大值
+
+```java
+xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
+```
+对金额进行修改，返回Integer  
+isadd = true 为增加金额  
+isadd = false 为扣除金额  
+isadd = null 为设置金额  
+返回0 表示成功  
 返回2 失败,表示玩家余额不足  
 返回3 失败,表示玩家余额超出最大值
 
@@ -108,12 +136,6 @@ xcapi.isbungeecordmode();
 Check whether BC mode is enabled, return boolean
 
 ```java
-xcapi.translateUUID(String playername);
-```
-Convert the player name to UUID, return UUID  
-If the player does not exist, return null
-
-```java
 xcapi.formatdouble(String amount);
 ```
 Format amount, return BigDecimal
@@ -125,9 +147,32 @@ Convert the amount to display message, return String
 For example: 5,000 dollars
 
 ```java
-xcapi.getbalance(UUID uid);
+xcapi.createPlayerData(uid, name);
 ```
-Get player amount, return BigDecimal
+Creating player data
+
+```java
+xcapi.getPlayerData(UUID uid);
+xcapi.getPlayerData(String name);
+```
+Get player data，return PlayerData
+
+```java
+//Get player UUID
+PlayerData.getUniqueId();
+//Get player name
+PlayerData.getName();
+//Get player balance，return BigDecimal
+PlayerData.getBalance();
+//Verify the data is valid，return boolean
+PlayerData.isValid();
+```
+About PlayerData
+
+```java
+xcapi.getorcreateAccountBalance(String account);
+```
+Get non-player-account，return BigDecimal
 
 ```java
 xcapi.ismaxnumber(BigDecimal amount);
@@ -135,7 +180,7 @@ xcapi.ismaxnumber(BigDecimal amount);
 Check whether the amount is the maximum value, return boolean
 
 ```java
-xcapi.changebalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
+xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
 ```
 Modify the amount, return Integer  
 isadd = true, add amount to balacne  
@@ -143,6 +188,17 @@ isadd = false, take amount from balance
 isadd = null, set amount to balance  
 return 0 means success  
 return 1 means failure that BungeeCord mode is enabled and no player is online  
+return 2 means failure that the player's balance is insufficient  
+return 3 means failure that the player's balance exceeds the maximum value
+
+```java
+xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
+```
+Modify the amount, return Integer  
+isadd = true, add amount to balacne  
+isadd = false, take amount from balance  
+isadd = null, set amount to balance  
+return 0 means success  
 return 2 means failure that the player's balance is insufficient  
 return 3 means failure that the player's balance exceeds the maximum value
 

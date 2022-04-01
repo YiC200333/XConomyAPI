@@ -1,5 +1,5 @@
 /*
- *  This file (ServerINFO.java) is a part of project XConomy
+ *  This file (DataLink.java) is a part of project XConomy
  *  Copyright (C) YiC and contributors
  *
  *  This program is free software: you can redistribute it and/or modify it
@@ -16,31 +16,14 @@
  *  with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package me.yic.xconomy.info;
+package me.yic.xconomy.data;
 
-import java.math.BigDecimal;
+import java.util.UUID;
 
-public class ServerINFO {
+public class DataLink {
 
-    public static boolean IsBungeeCordMode = false;
+    public static boolean newPlayer(UUID uid, String name) {
+        return false;
+    }
 
-    public static boolean IsSemiOnlineMode = false;
-
-    public static String Lang;
-
-    public static boolean EnableConnectionPool = false;
-
-    public static String Sign;
-
-    public static boolean DDrivers = false;
-
-    public static double InitialAmount = 0.0;
-
-    public static BigDecimal PaymentTax = BigDecimal.ONE;
-
-    public static int RankingSize = 10;
-
-    public static int LinesNumber = 5;
-
-    public static boolean IgnoreCase = false;
 }

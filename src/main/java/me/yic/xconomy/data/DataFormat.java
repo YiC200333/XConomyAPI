@@ -19,7 +19,6 @@
 package me.yic.xconomy.data;
 
 import me.yic.xconomy.XConomy;
-import me.yic.xconomy.info.ServerINFO;
 import org.bukkit.ChatColor;
 
 import java.math.BigDecimal;
