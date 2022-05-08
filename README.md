@@ -13,7 +13,7 @@ How to add the API with Maven:
     <dependency>
         <groupId>com.github.YiC200333</groupId>
         <artifactId>XConomyAPI</artifactId>
-        <version>2.17.2</version>
+        <version>2.18.1</version>
         <scope>provided</scope>
     </dependency>
 </dependencies>
@@ -26,7 +26,7 @@ repositories {
     maven { url 'https://jitpack.io' }
 }
 dependencies {
-    compileOnly "com.github.YiC200333:XConomyAPI:2.17.2"
+    compileOnly "com.github.YiC200333:XConomyAPI:2.18.1"
 }
 ```
 

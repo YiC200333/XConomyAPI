@@ -1,5 +1,5 @@
 # About XConomyAPI
-For XConomy 2.17.2
+For XConomy 2.18.1
 ## Chinese
 ```java
 XConomyAPI xcapi = new XConomyAPI;
@@ -35,7 +35,8 @@ xcapi.createPlayerData(uid, name);
 xcapi.getPlayerData(UUID uid);
 xcapi.getPlayerData(String name);
 ```
-获取玩家数据，返回PlayerData
+获取玩家数据，返回PlayerData  
+如果返回null，表示该玩家不存在
 
 ```java
 //获取玩家UUID
@@ -44,8 +45,6 @@ PlayerData.getUniqueId();
 PlayerData.getName();
 //获取玩家金额，返回BigDecimal
 PlayerData.getBalance();
-//验证数据是否有效，返回boolean
-PlayerData.isValid();
 ```
 关于PlayerData
 
@@ -116,6 +115,16 @@ xcapi.setglobalpermission(String permission, boolean vaule);
 设置玩家pay指令权限状态
 value为null时表示移除数据
 
+```java
+xcapi.getRPaymentPermission(UUID uid);
+```
+获取玩家是否接受转账，返回boolean
+
+```java
+xcapi.setRPaymentPermission(String permission, boolean vaule);
+```
+设置玩家是否接受转账
+
 
 ****
 
@@ -155,7 +164,8 @@ Creating player data
 xcapi.getPlayerData(UUID uid);
 xcapi.getPlayerData(String name);
 ```
-Get player data，return PlayerData
+Get player data，return PlayerData  
+If return null, this player is not existed
 
 ```java
 //Get player UUID
@@ -164,8 +174,6 @@ PlayerData.getUniqueId();
 PlayerData.getName();
 //Get player balance，return BigDecimal
 PlayerData.getBalance();
-//Verify the data is valid，return boolean
-PlayerData.isValid();
 ```
 About PlayerData
 
@@ -235,3 +243,13 @@ xcapi.setglobalpermission(String permission, boolean vaule);
 ```
 Set player pay command permission status  
 When value is null, the data is removed
+
+```java
+xcapi.getRPaymentPermission(UUID uid);
+```
+Get whether the player accepts the transfer, return boolean
+
+```java
+xcapi.setRPaymentPermission(String permission, boolean vaule);
+```
+Set whether the player accepts the transfer
