@@ -25,7 +25,6 @@ import me.yic.xconomy.data.DataLink;
 import me.yic.xconomy.data.caches.Cache;
 import me.yic.xconomy.info.PermissionINFO;
 import me.yic.xconomy.utils.PlayerData;
-import org.bukkit.Bukkit;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,7 +35,7 @@ import java.util.UUID;
 public class XConomyAPI {
 
     public String getversion() {
-        return XConomy.getInstance().getDescription().getVersion();
+        return "XConomy.getInstance().getDescription().getVersion()";
     }
 
     public boolean isbungeecordmode() {
@@ -71,8 +70,13 @@ public class XConomyAPI {
         return DataFormat.isMAX(amount);
     }
 
+
     public int changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd) {
-        if (XConomy.Config.BUNGEECORD_ENABLE & Bukkit.getOnlinePlayers().isEmpty()) {
+        return changePlayerBalance(u, playername, amount, isadd, null);
+    }
+
+    public int changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd, String pluginname) {
+        if (XConomy.Config.BUNGEECORD_ENABLE) {
             return 1;
         }
         BigDecimal bal = getPlayerData(u).getBalance();
@@ -85,11 +89,15 @@ public class XConomyAPI {
                 return 2;
             }
         }
-        DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, "N/A");
+        DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, pluginname, null);
         return 0;
     }
 
     public int changeAccountBalance(String account, BigDecimal amount, Boolean isadd) {
+        return changeAccountBalance(account, amount, isadd, null);
+    }
+
+    public int changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname) {
         BigDecimal bal = getorcreateAccountBalance(account);
         if (isadd) {
             if (ismaxnumber(bal.add(amount))) {
@@ -100,9 +108,10 @@ public class XConomyAPI {
                 return 2;
             }
         }
-        DataCon.changeaccountdata("PLUGIN_API", amount, isadd, "N/A");
+        DataCon.changeaccountdata("PLUGIN_API", account, amount, isadd, pluginname);
         return 0;
     }
+
 
     public List<String> getbalancetop() {
         return Cache.baltop_papi;
@@ -137,31 +146,5 @@ public class XConomyAPI {
 
     public void setpaytoggle(UUID uid, boolean vaule) {
         PermissionINFO.setRPaymentPermission(uid, vaule);
-    }
-
-
-
-    @Deprecated
-    public BigDecimal getbalance(UUID uid) {
-        return DataCon.getPlayerData(uid).getBalance();
-    }
-
-    @Deprecated
-    public int changebalance(UUID u, String playername, BigDecimal amount, Boolean isadd) {
-        if (XConomy.Config.BUNGEECORD_ENABLE & Bukkit.getOnlinePlayers().isEmpty()) {
-            return 1;
-        }
-        BigDecimal bal = getbalance(u);
-        if (isadd) {
-            if (ismaxnumber(bal.add(amount))) {
-                return 3;
-            }
-        } else {
-            if (bal.compareTo(amount) < 0) {
-                return 2;
-            }
-        }
-        DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, "N/A");
-        return 0;
     }
 }

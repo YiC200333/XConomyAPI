@@ -18,62 +18,52 @@
  */
 package me.yic.xconomy.info;
 
-import org.bukkit.configuration.file.FileConfiguration;
 
 import java.math.BigDecimal;
 import java.util.List;
 
 public class DefaultConfig {
-    public static FileConfiguration config;
 
     public DefaultConfig() {
     }
 
-    public String LANGUAGE = config.getString("Settings.language");
-    public boolean CHECK_UPDATE = config.getBoolean("Settings.check-update");
-    public int REFRESH_TIME = Math.max(config.getInt("Settings.refresh-time"), 30);
-    public boolean ECO_COMMAND = config.getBoolean("Settings.eco-command");
-    public boolean DISABLE_ESSENTIAL = config.getBoolean("Settings.disable-essentials");
-    public double INITIAL_BAL = config.getDouble("Settings.initial-bal");
+    public String LANGUAGE = "";
+    public boolean CHECK_UPDATE = false;
+    public int REFRESH_TIME = 0;
+    public boolean ECO_COMMAND = false;
+    public boolean DISABLE_ESSENTIAL = false;
+    public double INITIAL_BAL = 0;
     public BigDecimal PAYMENT_TAX = BigDecimal.ZERO;
     public int RANKING_SIZE = getrankingsize();
-    public int LINES_PER_PAGE = config.getInt("Settings.lines-per-page");
-    public boolean DISABLE_CACHE = config.getBoolean("Settings.disable-cache");
-    public boolean TRANSACTION_RECORD = config.getBoolean("Settings.transaction-record");
+    public int LINES_PER_PAGE = 0;
+    public boolean DISABLE_CACHE = false;
+    public boolean TRANSACTION_RECORD = false;
     public boolean PAY_TIPS = false;
-    public boolean USERNAME_IGNORE_CASE = config.getBoolean("Settings.username-ignore-case");
+    public boolean USERNAME_IGNORE_CASE = false;
 
-    public boolean NON_PLAYER_ACCOUNT = config.getBoolean("non-player-account.enable");
+    public boolean NON_PLAYER_ACCOUNT = false;
     public List<String> NON_PLAYER_ACCOUNT_SUBSTRING = null;
 
-    public String SINGULAR_NAME = config.getString("Currency.singular-name");
-    public String PLURAL_NAME = config.getString("Currency.plural-name");
-    public boolean INTEGER_BAL = config.getBoolean("Currency.integer-bal");
-    public String THOUSANDS_SEPARATOR = config.getString("Currency.thousands-separator");
-    public String DISPLAY_FORMAT = config.getString("Currency.display-format");
-    public String MAX_NUMBER = config.getString("Currency.max-number");
+    public String SINGULAR_NAME = "";
+    public String PLURAL_NAME = "";
+    public boolean INTEGER_BAL = false;
+    public String THOUSANDS_SEPARATOR = "";
+    public String DISPLAY_FORMAT = "";
+    public String MAX_NUMBER = "";
     public List<Integer> FORMAT_BALANCE = null;
 
     public boolean BUNGEECORD_ENABLE = false;
-    public String BUNGEECORD_SIGN = config.getString("BungeeCord.sign");
+    public String BUNGEECORD_SIGN = "";
 
 
     private int getrankingsize() {
-        return Math.min(config.getInt("Settings.ranking-size"), 100);
+        return 0;
     }
 
 
     private void setnonplayeraccount() {
-        if (NON_PLAYER_ACCOUNT) {
-            if (config.getBoolean("non-player-account.whitelist.enable")) {
-                NON_PLAYER_ACCOUNT_SUBSTRING = config.getStringList("non-player-account.whitelist.fields-list");
-            }
-        }
     }
 
     private void setpaytips() {
-        if (TRANSACTION_RECORD) {
-            PAY_TIPS = config.getBoolean("Settings.offline-pay-transfer-tips");
-        }
     }
 }
