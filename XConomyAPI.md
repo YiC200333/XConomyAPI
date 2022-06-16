@@ -1,5 +1,5 @@
 # About XConomyAPI
-For XConomy 2.18.1
+For XConomy 2.18.11
 ## Chinese
 ```java
 XConomyAPI xcapi = new XConomyAPI;
@@ -60,6 +60,7 @@ xcapi.ismaxnumber(BigDecimal amount);
 
 ```java
 xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
+xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 对金额进行修改，返回Integer  
 isadd = true 为增加金额  
@@ -72,6 +73,7 @@ isadd = null 为设置金额
 
 ```java
 xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
+xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 对金额进行修改，返回Integer  
 isadd = true 为增加金额  
@@ -189,6 +191,7 @@ Check whether the amount is the maximum value, return boolean
 
 ```java
 xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd);
+xcapi.changePlayerBalance(UUID u, String playername, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 Modify the amount, return Integer  
 isadd = true, add amount to balacne  
@@ -201,6 +204,7 @@ return 3 means failure that the player's balance exceeds the maximum value
 
 ```java
 xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
+xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 Modify the amount, return Integer  
 isadd = true, add amount to balacne  
