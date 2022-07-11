@@ -2,7 +2,7 @@
 For XConomy 2.18.11
 ## Chinese
 ```java
-XConomyAPI xcapi = new XConomyAPI;
+XConomyAPI xcapi = new XConomyAPI();
 ```
 
 ```java
