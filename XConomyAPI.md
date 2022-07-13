@@ -133,7 +133,7 @@ xcapi.setRPaymentPermission(String permission, boolean vaule);
 
 ## English
 ```java
-XConomyAPI xcapi = new XConomyAPI;
+XConomyAPI xcapi = new XConomyAPI();
 ```
 
 ```java
