@@ -16,9 +16,8 @@
  *  with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package me.yic.xconomy.utils;
+package me.yic.xconomy.data.syncdata;
 
-import me.yic.xconomy.data.syncdata.SyncData;
 import me.yic.xconomy.info.SyncType;
 
 import java.math.BigDecimal;

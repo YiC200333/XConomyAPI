@@ -18,7 +18,7 @@
  */
 package me.yic.xconomy.data;
 
-import me.yic.xconomy.utils.PlayerData;
+import me.yic.xconomy.data.syncdata.PlayerData;
 
 import java.math.BigDecimal;
 import java.util.UUID;
