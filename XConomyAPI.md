@@ -1,5 +1,5 @@
 # About XConomyAPI
-For XConomy 2.18.11
+For XConomy 2.21.4
 ## Chinese
 ```java
 XConomyAPI xcapi = new XConomyAPI();
@@ -11,9 +11,12 @@ xcapi.getversion();
 获取XConomy版本号，返回String
 
 ```java
-xcapi.isbungeecordmode();
+xcapi.getSyncChannalType();
 ```
-是否启用BC模式，返回boolean
+获取数据同步模式，返回SyncChannalType
+SyncChannalType.OFF 未开启数据同步
+SyncChannalType.BUNGEECORD 开启了数据同步，通道为Bungeecord
+SyncChannalType.REDIS 开启了数据同步，通道为Redis
 
 ```java
 xcapi.formatdouble(String amount);
@@ -141,10 +144,13 @@ xcapi.getversion();
 ```
 Gets the xconomy version number, return String
 
-```java 
-xcapi.isbungeecordmode();
+```java
+xcapi.getSyncChannalType();
 ```
-Check whether BC mode is enabled, return boolean
+Get the data synchronization mode and return SyncChanalType
+SyncChannalType.OFF Data synchronization is not enabled
+SyncChannalType.BUNGEECORD Data synchronization is enabled, and the channel is Bungerecord
+SyncChannalType.REDIS Data synchronization is enabled, and the channel is Redis
 
 ```java
 xcapi.formatdouble(String amount);

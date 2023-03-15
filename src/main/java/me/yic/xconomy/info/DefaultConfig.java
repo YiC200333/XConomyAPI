@@ -55,6 +55,7 @@ public class DefaultConfig {
     public boolean BUNGEECORD_ENABLE = false;
     public String BUNGEECORD_SIGN = "";
 
+    public SyncChannalType SYNCDATA_TYPE = SyncChannalType.OFF;
 
     private int getrankingsize() {
         return 0;

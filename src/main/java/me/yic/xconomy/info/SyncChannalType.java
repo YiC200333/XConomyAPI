@@ -1,5 +1,5 @@
 /*
- *  This file (XConomy.java) is a part of project XConomy
+ *  This file (SyncChannalType.java) is a part of project XConomy
  *  Copyright (C) YiC and contributors
  *
  *  This program is free software: you can redistribute it and/or modify it
@@ -16,31 +16,29 @@
  *  with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
  */
-package me.yic.xconomy;
+package me.yic.xconomy.info;
 
-import me.yic.xconomy.info.DefaultConfig;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.plugin.java.JavaPlugin;
 
-public class XConomy extends JavaPlugin {
+public enum SyncChannalType {
 
-    private static XConomy instance;
-    public static DefaultConfig Config;
+    OFF("Off"),
+    BUNGEECORD("BungeeCord"),
+    REDIS("Redis");
 
-    @SuppressWarnings("ConstantConditions")
-    public void onEnable() {
-        instance = this;
-        getLogger().info("XConomy加载成功");
+    final String value;
 
-    }
 
-    public void onDisable() {
-        getLogger().info("XConomy已成功卸载");
-    }
-
-    public static XConomy getInstance() {
-        return instance;
+    SyncChannalType(String value){
+        this.value = value;
     }
 
 
+    @Override
+    public String toString() {
+        return this.value;
+    }
+
+    public boolean equals(SyncChannalType Other){
+        return this.value.equals(Other.value);
+    }
 }
