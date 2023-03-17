@@ -147,7 +147,7 @@ Gets the xconomy version number, return String
 ```java
 xcapi.getSyncChannalType();
 ```
-Get the data synchronization mode and return SyncChanalType  
+Get the data synchronization mode, return SyncChanalType  
 SyncChannalType.OFF Data synchronization is not enabled  
 SyncChannalType.BUNGEECORD Data synchronization is enabled, and the channel is Bungerecord  
 SyncChannalType.REDIS Data synchronization is enabled, and the channel is Redis
