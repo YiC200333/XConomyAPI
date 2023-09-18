@@ -54,12 +54,14 @@ PlayerData.getBalance();
 ```java
 xcapi.createNonPlayerData(String account);
 ```
-创建非玩家数据，返回boolean
+创建非玩家数据，返回boolean  
+如果返回null，表示该账号不存在
 
 ```java
 xcapi.getNonPlayerBalance(String account);
 ```
 获取非玩家账号金额，返回BigDecimal
+如果返回null，表示该玩家不存在
 
 ```java
 xcapi.ismaxnumber(BigDecimal amount);
@@ -193,7 +195,8 @@ About PlayerData
 ```java
 xcapi.createNonPlayerData(String account);
 ```
-Creating non-player-account，return boolean
+Creating non-player-account，return boolean  
+If return null, this non-player-account is not existed
 
 ```java
 xcapi.getNonPlayerBalance(String account);
