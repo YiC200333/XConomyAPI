@@ -40,11 +40,6 @@ public class XConomyAPI {
         return "XConomy.PVersion";
     }
 
-    @Deprecated
-    public boolean isbungeecordmode() {
-        return XConomyLoad.Config.SYNCDATA_TYPE.equals(SyncChannalType.BUNGEECORD);
-    }
-
     public SyncChannalType getSyncChannalType() {
         return XConomyLoad.Config.SYNCDATA_TYPE;
     }
@@ -69,10 +64,17 @@ public class XConomyAPI {
         return DataCon.getPlayerData(name);
     }
 
+    public boolean createNonPlayerData(String account) {
+        return DataLink.newAccount(account);
+    }
+
+    public BigDecimal getNonPlayerBalance(String account) {
+        return DataCon.getAccountBalance(account);
+    }
+    @Deprecated
     public BigDecimal getorcreateAccountBalance(String account) {
         return DataCon.getAccountBalance(account);
     }
-
     public boolean ismaxnumber(BigDecimal amount) {
         return DataFormat.isMAX(amount);
     }
@@ -101,12 +103,20 @@ public class XConomyAPI {
         DataCon.changeplayerdata("PLUGIN_API", u, amount, isadd, pluginname, null);
         return 0;
     }
-
+    @Deprecated
     public int changeAccountBalance(String account, BigDecimal amount, Boolean isadd) {
-        return changeAccountBalance(account, amount, isadd, null);
+        return changeNonPlayerBalance(account, amount, isadd, null);
     }
 
+    @Deprecated
     public int changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname) {
+        return changeNonPlayerBalance(account, amount, isadd, pluginname);
+    }
+    public int changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd) {
+        return changeNonPlayerBalance(account, amount, isadd, null);
+    }
+
+    public int changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd, String pluginname) {
         BigDecimal bal = getorcreateAccountBalance(account);
         if (isadd != null) {
             if (isadd) {

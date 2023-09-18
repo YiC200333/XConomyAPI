@@ -32,7 +32,7 @@ xcapi.getdisplay(BigDecimal balance);
 ```java
 xcapi.createPlayerData(uid, name);
 ```
-创建玩家数据
+创建玩家数据，返回boolean
 
 ```java
 xcapi.getPlayerData(UUID uid);
@@ -52,7 +52,12 @@ PlayerData.getBalance();
 关于PlayerData
 
 ```java
-xcapi.getorcreateAccountBalance(String account);
+xcapi.createNonPlayerData(String account);
+```
+创建非玩家数据，返回boolean
+
+```java
+xcapi.getNonPlayerBalance(String account);
 ```
 获取非玩家账号金额，返回BigDecimal
 
@@ -75,8 +80,8 @@ isadd = null 为设置金额
 返回3 失败,表示玩家余额超出最大值
 
 ```java
-xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
-xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
+xcapi.changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd);
+xcapi.changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 对金额进行修改，返回Integer  
 isadd = true 为增加金额  
@@ -166,7 +171,7 @@ For example: 5,000 dollars
 ```java
 xcapi.createPlayerData(uid, name);
 ```
-Creating player data
+Creating player data, return boolean
 
 ```java
 xcapi.getPlayerData(UUID uid);
@@ -186,7 +191,12 @@ PlayerData.getBalance();
 About PlayerData
 
 ```java
-xcapi.getorcreateAccountBalance(String account);
+xcapi.createNonPlayerData(String account);
+```
+Creating non-player-account，return boolean
+
+```java
+xcapi.getNonPlayerBalance(String account);
 ```
 Get non-player-account，return BigDecimal
 
@@ -209,8 +219,8 @@ return 2 means failure that the player's balance is insufficient
 return 3 means failure that the player's balance exceeds the maximum value
 
 ```java
-xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd);
-xcapi.changeAccountBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
+xcapi.changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd);
+xcapi.changeNonPlayerBalance(String account, BigDecimal amount, Boolean isadd, String pluginname);
 ```
 Modify the amount, return Integer  
 isadd = true, add amount to balacne  
