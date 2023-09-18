@@ -1,5 +1,5 @@
 # About XConomyAPI
-For XConomy 2.21.4
+For XConomy 2.25.1
 ## Chinese
 ```java
 XConomyAPI xcapi = new XConomyAPI();
