@@ -59,7 +59,7 @@ xcapi.createNonPlayerData(String account);
 ```java
 xcapi.getNonPlayerBalance(String account);
 ```
-获取非玩家账号金额，返回BigDecimal
+获取非玩家账号金额，返回BigDecimal  
 如果返回null，表示该账号不存在
 
 ```java
